@@ -18,3 +18,50 @@ document.addEventListener("DOMContentLoaded", () => {
         createAccountForm.classList.add("form--hidden");
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+   
+    const loginForm = document.getElementById('login');
+    const createAccountForm = document.getElementById('createAccount');
+  
+   
+    loginForm.addEventListener('submit', function (event) {
+      if (!isFormValid(loginForm)) {
+        event.preventDefault(); 
+      }
+    });
+  
+    createAccountForm.addEventListener('submit', function (event) {
+      if (!isFormValid(createAccountForm)) {
+        event.preventDefault(); 
+      }
+    });
+  
+    
+    function isFormValid(form) {
+      const formInputs = form.querySelectorAll('.form__input');
+      let isValid = true;
+  
+      formInputs.forEach(function (input) {
+        if (input.value.trim() === '') {
+          isValid = false;
+        
+          const errorMessage = input.nextElementSibling;
+          errorMessage.textContent = 'This field is required';
+        }
+      });
+  
+      return isValid;
+    }
+  
+    
+    const allFormInputs = document.querySelectorAll('.form__input');
+    allFormInputs.forEach(function (input) {
+      input.addEventListener('focus', function () {
+        const errorMessage = input.nextElementSibling;
+        errorMessage.textContent = '';
+      });
+    });
+  });
+  
